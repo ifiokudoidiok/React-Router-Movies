@@ -2,10 +2,11 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 const Movie = (props) => {
-  const [movie, setMovie] = useState({});
+  const [movie, setMovie] = useState({stars:[]});
  
   useEffect(() => {
-    const id = 1;
+    // debugger
+    const id = props.match.params.id;
     // change ^^^ that line and grab the id from the URL
     // You will NEED to add a dependency array to this effect hook
 
@@ -32,6 +33,7 @@ const Movie = (props) => {
 
   const { title, director, metascore, stars } = movie;
   return (
+    
     <div className="save-wrapper">
       <div className="movie-card">
         <h2>{title}</h2>
@@ -41,6 +43,7 @@ const Movie = (props) => {
         <div className="movie-metascore">
           Metascore: <strong>{metascore}</strong>
         </div>
+        {/* debugger */}
         <h3>Actors</h3>
 
         {stars.map(star => (
