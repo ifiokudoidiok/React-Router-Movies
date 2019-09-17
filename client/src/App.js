@@ -11,28 +11,28 @@ const App = (props) => {
 // const id = props;
 // debugger
   const addToSavedList = movie => {
-    setSavedList( [...savedList, movie] );
+    if (!savedList.find(savedMovie => (savedMovie.id === movie.id))){
+
+      setSavedList( [...savedList, movie] );
+      console.log("button clicked!");
+    } else{console.log("already added!")}
   };
+
+
 
   return (
     <div>
       <SavedList list={savedList} />
       
       <Route exact path="/" component={MovieList} />
-      <Route path="/movies/:id" component={Movie} />
+      <Route path="/movies/:id"  render={props => (
+        <Movie addToSavedList = {addToSavedList} {...props} />
+      )
+
+      } />
 
       
-      {/* <Route path='/movies/:id' render={props => {
-        // 1- find out what this ":id" actually is in the browser location
-        const currentAppParameter = props.match.params.id;
-        // 2- knowing which app, pull the right component from the apps array
-        const theRightAppObject = id.find(appObject => {
-          return appObject.url === currentAppParameter;
-        });
-        const Component = theRightAppObject.id;
-        // 3- return the <Component />
-        return <Component {...props} name='gabe' />;
-      }} /> */}
+     
     </div>
   );
 };
